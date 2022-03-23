@@ -36,3 +36,27 @@ isDie --> |No| needTake{need take?}
 needTake --> |Yes| take
 needTake --> |No| legal
 ```
+
+
+## judge flow
+```mermaid
+flowchart LR
+S((start))-->findPoint[find a point]
+findPoint-->|No|E((end))
+findPoint-->|Yes|dealPoint[deal point]
+sumResult-->findPoint
+
+dealPoint-->whos{whos?}
+whos-->|Black|B((black))
+whos-->|White|W((white))
+whos-->|Empty|findNeibours[find neibours]
+findNeibours-->|all Black|B
+findNeibours-->|all White|W
+findNeibours-->|Both|calcDis[calc distence sum]
+calcDis-->|more Black|B
+calcDis-->|more White|W
+calcDis-->|equal|None((none))
+B-->sumResult[sum result]
+W-->sumResult
+None-->sumResult
+```
